@@ -28,4 +28,5 @@ char *word_terminator(char *word){
     word++;
   }
   return word;
+  
 }
