@@ -1,0 +1,6 @@
+#include <stdio.h>
+
+int space_char(char c){
+  return (c == '\0' ? 0 : (c == ' ' || c == '\t');
+}
+    
