@@ -20,7 +20,6 @@ int non_space_char(char c) {
 /*Will iterate until a letter is found and returns a pointer to the beginning of a word*/
 char *word_start (char *str){
   char *tmp = str;  /*Pointer that points to a char type gets the address of the string*/
-  
   while(space_char(*tmp) && tmp[0] != '\0'){ /*Iter through chars until a space or null is hit*/
     tmp++;
   }
@@ -58,4 +57,35 @@ char *copy_str(char *inStr, short len){
   }
   str_copy[len+1] = '\0'; /*Places the null terminator at the end*/
   return str_copy;
+}
+
+/*Tokenizes a string*/
+char **tokenize(char *str){
+  int size = count_words(str); /*Calls word count to know how much space to allocate in new array*/
+  char **tokens = malloc((size +1) * sizeof(char *)); /*Allocates array space for the tokens*/
+  char *start= word_start(str);
+  char *end = word_terminator(start);
+  for (int i = 0; i < size; i++){
+    tokens[i] = copy_str(start, end - start); /*Transfers the tokens using pointers to them*/
+    start = word_start(end);
+    end = word_terminator(start);
+  }
+  tokens[size] = NULL;
+  return tokens;
+  
+}
+/*Prints the current tokens*/
+void print_tokens(char **tokens){
+  int i;
+  for(i = 0; tokens[i] != NULL; i++){
+    printf("%s\n", tokens[i]);
+  }
+}
+/*Deletes current tokens to free up space*/
+void free_tokens(char **tokens){
+  int i;
+  for(i = 0; tokens[i] != NULL; i++){
+    free(tokens[i]);
+  }
+  free(tokens);
 }

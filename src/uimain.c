@@ -30,10 +30,21 @@ int main() {
   printf("copy_str output\n"); 
   printf("%s", copy_str(str,sizeof(str)));
   printf("\n");
- 
+  
   printf("count_words output\n");
   printf("%d", count_words(str));
   printf("\n");
-	      
+
+  char **tokens = tokenize(str);
+  
+  printf("print_tokens output\n");
+  print_tokens(tokens);
+  free_tokens(tokens);
+  printf("empty tokens\n");
+  print_tokens(tokens);
+  printf("end\n");
+  
+
+  
 }
 	     
